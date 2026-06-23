@@ -1,0 +1,9 @@
+services:
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - /srv/docker/chroma/data:/data
+    restart: unless-stopped
