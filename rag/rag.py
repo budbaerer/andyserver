@@ -8,10 +8,13 @@ spørsmål = input("Still et spørsmål: ")
 
 resultater = collection.query(
     query_texts=[spørsmål],
-    n_results=2
+    n_results=7
 )
 
 kontekst = "\n".join(resultater["documents"][0])
+print("\n--- KONTEKST FRA CHROMADB ---")
+print(kontekst)
+print("--- SLUTT KONTEKST ---\n")
 
 client_ollama = ollama.Client(host="http://192.168.68.103:11434")
 respons = client_ollama.chat(
@@ -19,7 +22,7 @@ respons = client_ollama.chat(
     messages=[
         {
             "role": "system",
-            "content": "Svar kun basert på informasjonen du får. Svar på norsk."
+            "content": "Du er en arkivfaglig assistent. Svar kun basert på informasjonen du får. Svar på norsk bokmål. Hvis svaret ikke finnes i informasjonen, si at du ikke vet."
         },
         {
             "role": "user",
